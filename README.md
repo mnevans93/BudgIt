@@ -5,14 +5,14 @@ BudgIt is a personal project of mine, designed to replace budget spreadsheets I'
 
 ## <u>Technologies Used</u>
 <ul>
-    <li>React</li>
+    <li>MongoDB / Mongoose</li>
     <li>Express</li>
-    <li>MongoDB</li>
+    <li>React</li>
     <li>Node.js</li>
 </ul>
 
 ## <u>Planning</u>
-<a href=''>Trello Board Link</a> (currently a dead link)
+<a href='https://trello.com/b/O4HcFuG9/budgit-app'>Trello Board Link</a>
 
 <a href=''>ERD Link</a> (currently a dead link)
 
