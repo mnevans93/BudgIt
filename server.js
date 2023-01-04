@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'build')))
 app.use(require('./config/checkToken'))
 const ensureLoggedIn = require('./config/ensureLoggedIn')
 
-// ROUTES GO HERE
+app.use('/api/users', require('./routes/api/users'))
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
