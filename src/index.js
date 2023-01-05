@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './styles.css';
-import App from './pages/App/App';
+import './styles.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './pages/App/App'
 
-import { BrowserRouter as Router } from 'react-router-dom';
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { BrowserRouter as Router } from 'react-router-dom'
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <Router>
       <App />
     </Router>
   </React.StrictMode>
-);
+)

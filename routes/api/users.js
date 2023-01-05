@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { checkToken, dataController, apiController } = require('../../controllers/api/users')
+const { dataController, apiController } = require('../../controllers/api/users')
+const checkToken = require('../../config/checkToken')
 const ensureLoggedIn = require('../../config/ensureLoggedIn')
 
 // New account route

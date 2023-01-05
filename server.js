@@ -10,8 +10,8 @@ const app = express()
 
 app.use(express.json())
 app.use((req, res, next) => {
-    res.locals.data = {}
-    next()
+  res.locals.data = {}
+  next()
 })
 
 app.use(logger('dev'))
@@ -24,8 +24,9 @@ const ensureLoggedIn = require('./config/ensureLoggedIn')
 app.use('/api/users', require('./routes/api/users'))
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  res.redirect('/login')
 })
 app.listen(PORT, () => {
-    console.log(`Listening on ${PORT}`)
+  console.log(`Listening on ${PORT}`)
 })
