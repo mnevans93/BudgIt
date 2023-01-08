@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 export default function OptionsPage (props) {
     useEffect(() => {
-        props.setPage("User Options")
+        props.setPage("Options")
     })
     
     return (

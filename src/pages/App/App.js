@@ -24,9 +24,9 @@ export default function App () {
 
   return (
     <main className='App'>
+      <NavBar user={user} setUser={setUser} page={page} link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />
       {user
         ? <>
-          <NavBar user={user} setUser={setUser} page={page} link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />
           <Routes>
             <Route path='/dashboard' element={<DashboardPage page={page} setPage={setPage} />} />
             <Route path='/accounts/new' element={<NewAccountPage page={page} setPage={setPage} />} />
@@ -36,8 +36,8 @@ export default function App () {
           </Routes>
         </>
         : <Routes>
-            <Route path='/signup' element={<AuthPage setUser={setUser} form='signup' />} />
-            <Route path='/login' element={<AuthPage setUser={setUser} form='login' />} />
+            <Route path='/signup' element={<AuthPage setUser={setUser} form='signup' link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />} />
+            <Route path='/login' element={<AuthPage setUser={setUser} form='login' link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />} />
             <Route path='/welcome' element={<WelcomePage link={link} setLink={setLink} handleClick={handleClick} navigate={navigate} />} />
             <Route path='/*' element={<Navigate to='/welcome' />} />
           </Routes>}

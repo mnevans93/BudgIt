@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { logOut } from '../../utilities/users-service'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -6,10 +6,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-export default function NavBar ( {user, setUser, page, link, setLink, navigate, handleClick } ) {
-    useEffect(() => {
-      navigate(link)
-    }, [link])
+export default function NavBar ({ user, setUser, page, link, setLink, navigate, handleClick }) {
+  useEffect(() => {
+    navigate(link)
+  }, [link])
   
   const handleLogout = (e) => {
     e.preventDefault()
@@ -19,8 +19,9 @@ export default function NavBar ( {user, setUser, page, link, setLink, navigate, 
   }
 
   return (
+    user ?
     <div className='main-nav'>
-      <Navbar bg="primary" expand="false" className="mb-3">
+      <Navbar bg="primary" expand="false" className="mb-3" collapseOnSelect="true">
         <Container fluid>
           <Navbar.Brand>{page}</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-expand`} />
@@ -47,7 +48,7 @@ export default function NavBar ( {user, setUser, page, link, setLink, navigate, 
                   <NavDropdown.Item href={`/accounts/${''}`} onClick={(e) => handleClick(e, `/accounts/${''}`)} >Account Name</NavDropdown.Item>
                   <NavDropdown.Item href="/accounts/new" onClick={(e) => handleClick(e, '/accounts/new')} >Add a new account</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="/options" onClick={(e) => handleClick(e, '/options')} >User Options</Nav.Link>
+                <Nav.Link href="/options" onClick={(e) => handleClick(e, '/options')} >Options</Nav.Link>
                 <Nav.Link href="/welcome" onClick={(e) => handleLogout(e)} ><span className="logout">Logout</span></Nav.Link>
               </Nav>
             </Offcanvas.Body>
@@ -55,5 +56,6 @@ export default function NavBar ( {user, setUser, page, link, setLink, navigate, 
         </Container>
       </Navbar>
     </div>
+    : ''
   )
 }
