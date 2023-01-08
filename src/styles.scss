@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap');
+
+$app-bg: #4f6752;
+$app-maintext: #01182b;
+$app-stonks: #60c3ac;
+$button-bg: #c4be9c;
+$active: #c4716c;
+
+$offcanvas-bg-color: $button-bg;
+$offcanvas-color: $app-maintext;
+
+html, body, #root, .App {
+    height: 100%;
+    margin: auto;
+    font-family: 'Mulish';
+    background-color: $app-bg;
+    color: $app-maintext;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.main-nav {
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+.dropdown-menu.show {
+    text-align: center;
+    background-color: $button-bg;
+}
+
+span.logout {
+    color: $active;
+}
+
+a.nav-link, a.dropdown-item {
+    border-radius: 15px;
+}
+
+a.nav-link:hover, a.dropdown-item:hover {
+    background-color: $app-bg;
+    transition-duration: .3s;
+}
+
+Form {
+    width: 60%;
+    margin: auto;
+}
+
+.error-message {
+    color: $active;
+}
+
+$theme-colors: (
+    "primary": $button-bg,
+    "secondary": $active,
+);
+
+@import "~bootstrap/scss/bootstrap"

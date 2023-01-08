@@ -16,6 +16,10 @@ const userSchema = new Schema({
     trim: true,
     minLength: 3,
     required: true
+  },
+  accounts: {
+    type: Array,
+    required: true
   }
 }, {
   timestamps: true,

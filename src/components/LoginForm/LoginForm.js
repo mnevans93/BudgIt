@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { redirect } from 'react-router-dom'
 import * as userService from '../../utilities/users-service'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 export default function LoginForm (props) {
   const [credentials, setCredentials] = useState({
@@ -25,17 +27,21 @@ export default function LoginForm (props) {
   }
 
   return (
-    <div>
-      <div className='form-container'>
-        <form autoComplete='off' onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input type='email' name='email' value={credentials.email} onChange={handleChange} required />
-          <label>Password</label>
-          <input type='password' name='password' value={credentials.password} onChange={handleChange} required />
-          <button type='submit'>LOG IN</button>
-        </form>
-      </div>
-      <h1 className='error-message'>&nbsp;{error}</h1>
-    </div>
+    <>
+      <h1>Welcome back! Sign in below to pick up where you left off.</h1>
+      <br />
+      <Form className='text-center' onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder="Enter email" required />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type='password' name='password' value={credentials.password} onChange={handleChange} placeholder="Password" required />
+        </Form.Group>
+        <Button variant="primary" type="submit">LOG IN</Button>
+        <br /><p className='error-message'>&nbsp;{error}</p>
+      </Form>
+    </>
   )
 }
