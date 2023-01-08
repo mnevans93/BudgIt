@@ -38,21 +38,6 @@ export default function SignUpForm (props) {
   const disable = credentials.password ? (credentials.password !== credentials.confirm) : true
 
   return (
-    // <>
-    //   <form autoComplete='off' onSubmit={handleSubmit}>
-    //     <label>Name</label>
-    //     <input type='text' name='name' value={credentials.name} onChange={handleChange} required /> <br />
-    //     <label>Email</label>
-    //     <input type='email' name='email' value={credentials.email} onChange={handleChange} required /> <br />
-    //     <label>Password</label>
-    //     <input type='password' name='password' value={credentials.password} onChange={handleChange} required /> <br />
-    //     <label>Confirm Password</label>
-    //     <input type='password' name='confirm' value={credentials.confirm} onChange={handleChange} required /> <br />
-    //     <button className={signUpBtnClass} type='submit' disabled={disable}>SIGN UP</button>
-    //   </form>
-    //   <p className='error-message'>&nbsp;{credentials.error}</p>
-    // </>
-
     <>
       <h1>Welcome to BudgIt! Sign up &#128071; to get started.</h1>
       <br />
@@ -69,7 +54,7 @@ export default function SignUpForm (props) {
         <Form.Label>Password</Form.Label>
         <Form.Control type='password' name='password' value={credentials.password} onChange={handleChange} placeholder="Password" required />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3" controlId="formBasicConfirm">
         <Form.Label>Confirm Password</Form.Label>
         <Form.Control type='password' name='confirm' value={credentials.confirm} onChange={handleChange} placeholder="Confirm password" required />
       </Form.Group>

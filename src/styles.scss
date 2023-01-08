@@ -4,7 +4,7 @@ $app-bg: #4f6752;
 $app-maintext: #01182b;
 $app-stonks: #60c3ac;
 $button-bg: #c4be9c;
-$active: #c4716c;
+$active: #e46e68;
 
 $offcanvas-bg-color: $button-bg;
 $offcanvas-color: $app-maintext;
@@ -23,13 +23,22 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
+}
+
+div.button-wrapper > a.btn, button.btn {
+    min-width: 100px;
 }
 
 .main-nav {
     position: absolute;
     width: 100%;
     top: 0;
+}
+
+hr {
+    margin: 0;
+    color: $app-maintext;
 }
 
 .dropdown-menu.show {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { getUser } from '../../utilities/users-service'
 import NavBar from '../../components/NavBar/NavBar'
 import DashboardPage from '../DashboardPage/DashboardPage'
@@ -12,14 +12,21 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
 
 export default function App () {
+  let navigate = useNavigate()
   const [user, setUser] = useState(getUser())
-  const [page, setPage] = useState("My Dashboard")
+  const [page, setPage] = useState('My Dashboard')
+  const [link, setLink] = useState('/welcome')
+    
+    const handleClick = (e, link) => {
+        e.preventDefault()
+        setLink(link)
+    }
 
   return (
     <main className='App'>
       {user
         ? <>
-          <NavBar user={user} setUser={setUser} page={page} setPage={setPage} />
+          <NavBar user={user} setUser={setUser} page={page} link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />
           <Routes>
             <Route path='/dashboard' element={<DashboardPage page={page} setPage={setPage} />} />
             <Route path='/accounts/new' element={<NewAccountPage page={page} setPage={setPage} />} />
@@ -31,7 +38,7 @@ export default function App () {
         : <Routes>
             <Route path='/signup' element={<AuthPage setUser={setUser} form='signup' />} />
             <Route path='/login' element={<AuthPage setUser={setUser} form='login' />} />
-            <Route path='/welcome' element={<WelcomePage />} />
+            <Route path='/welcome' element={<WelcomePage link={link} setLink={setLink} handleClick={handleClick} navigate={navigate} />} />
             <Route path='/*' element={<Navigate to='/welcome' />} />
           </Routes>}
     </main>
