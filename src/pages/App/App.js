@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { getUser } from '../../utilities/users-service'
 import NavBar from '../../components/NavBar/NavBar'
@@ -17,21 +17,22 @@ export default function App () {
   const [page, setPage] = useState('My Dashboard')
   const [link, setLink] = useState('/welcome')
     
-    const handleClick = (e, link) => {
-        e.preventDefault()
-        setLink(link)
-    }
+  const handleClick = (e, link) => {
+      console.log(user)
+      e.preventDefault()
+      setLink(link)
+  }
 
   return (
     <main className='App'>
-      <NavBar user={user} setUser={setUser} page={page} link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />
       {user
         ? <>
+          <NavBar user={user} setUser={setUser} page={page} link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />
           <Routes>
-            <Route path='/dashboard' element={<DashboardPage page={page} setPage={setPage} />} />
-            <Route path='/accounts/new' element={<NewAccountPage page={page} setPage={setPage} />} />
-            <Route path='/accounts' element={<AccountPage page={page} setPage={setPage} />} />
-            <Route path='/options' element={<OptionsPage page={page} setPage={setPage} />} />
+            <Route path='/dashboard' element={<DashboardPage page={page} setPage={setPage} user={user} setUser={setUser} getUser={getUser} />} />
+            <Route path='/accounts/new' element={<NewAccountPage page={page} setPage={setPage} user={user} setUser={setUser} />} />
+            <Route path='/accounts/*' element={<AccountPage page={page} setPage={setPage} user={user} setUser={setUser} link={link} />} />
+            <Route path='/options' element={<OptionsPage page={page} setPage={setPage} user={user} setUser={setUser} />} />
             <Route path='/*' element={<Navigate to='/dashboard' />} />
           </Routes>
         </>

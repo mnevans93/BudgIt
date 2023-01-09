@@ -7,9 +7,19 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export default function NavBar ({ user, setUser, page, link, setLink, navigate, handleClick }) {
+  const [accounts, setAccounts] = useState(user.accounts.map(account => 
+    <NavDropdown.Item key={account._id} href={`/accounts/${account._id}`} onClick={(e) => handleClick(e, `/accounts/${account._id}`)} >{account.nickname}</NavDropdown.Item>
+  ))
+
   useEffect(() => {
     navigate(link)
   }, [link])
+
+  useEffect(() => {
+    setAccounts(user.accounts.map(account => 
+      <NavDropdown.Item key={account._id} href={`/accounts/${account._id}`} onClick={(e) => handleClick(e, `/accounts/${account._id}`)} >{account.nickname}</NavDropdown.Item>
+    ))
+  }, [user])
   
   const handleLogout = (e) => {
     e.preventDefault()
@@ -44,8 +54,7 @@ export default function NavBar ({ user, setUser, page, link, setLink, navigate, 
                   title="My Accounts"
                   id={`offcanvasNavbarDropdown-expand-expand`}
                 >
-                  {/* MAP FUNCTION HERE FOR EACH INDIVIDUAL ITEM */}
-                  <NavDropdown.Item href={`/accounts/${''}`} onClick={(e) => handleClick(e, `/accounts/${''}`)} >Account Name</NavDropdown.Item>
+                  {accounts}
                   <NavDropdown.Item href="/accounts/new" onClick={(e) => handleClick(e, '/accounts/new')} >Add a new account</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/options" onClick={(e) => handleClick(e, '/options')} >Options</Nav.Link>

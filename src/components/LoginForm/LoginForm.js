@@ -14,13 +14,13 @@ export default function LoginForm ({ setUser, link, navigate, handleClick }) {
     navigate(link)
   }, [link])
 
-  const handleChange = (evt) => {
-    setCredentials({ ...credentials, [evt.target.name]: evt.target.value })
+  const handleChange = (event) => {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value })
     setError('')
   }
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault()
+  const handleSubmit = async (event) => {
+    event.preventDefault()
     try {
       const user = await userService.login(credentials)
       setUser(user)
@@ -39,7 +39,7 @@ export default function LoginForm ({ setUser, link, navigate, handleClick }) {
       <Form className='text-center' onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder="Enter email" required />
+          <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder="Enter your email" required />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>

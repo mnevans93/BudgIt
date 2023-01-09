@@ -36,6 +36,11 @@ div.button-wrapper > a.btn, A.btn.btn-primary, button.btn {
     top: 0;
 }
 
+span.navbar-brand {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
 hr {
     margin: 0 !important;
     color: $app-maintext !important;
@@ -64,13 +69,12 @@ Form {
     margin: auto;
 }
 
-.error-message {
+.error-message, .warning-message {
     color: $active;
 }
 
 $theme-colors: (
     "primary": $button-bg,
-    "secondary": $active,
 );
 
 @import "~bootstrap/scss/bootstrap"

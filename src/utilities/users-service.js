@@ -31,3 +31,9 @@ export function getUser () {
 export function logOut () {
   window.localStorage.removeItem('token')
 }
+
+export async function update (userData) {
+  const token = await usersAPI.update(userData)
+  window.localStorage.setItem('token', token)
+  return getUser()
+}

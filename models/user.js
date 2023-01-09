@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const accountSchema = require('./accountSchema')
 const bcrypt = require('bcrypt')
 const SALT_ROUNDS = 6
 
@@ -17,12 +18,8 @@ const userSchema = new Schema({
     minLength: 3,
     required: true
   },
-  accounts: {
-    type: Array,
-    required: true
-  }
+  accounts: [accountSchema]
 }, {
-  timestamps: true,
   toJSON: {
     transform (doc, ret) {
       delete ret.password
