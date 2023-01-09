@@ -12,6 +12,13 @@ export async function login (credentials) {
   return getUser()
 }
 
+export async function update (userData) {
+  window.localStorage.removeItem('token')
+  const token = await usersAPI.update(userData)
+  window.localStorage.setItem('token', token)
+  return getUser()
+}
+
 export function getToken () {
   const token = window.localStorage.getItem('token')
   if (!token) return null
@@ -30,11 +37,4 @@ export function getUser () {
 
 export function logOut () {
   window.localStorage.removeItem('token')
-}
-
-export async function update (userData) {
-  window.localStorage.removeItem('token')
-  const token = await usersAPI.update(userData)
-  window.localStorage.setItem('token', token)
-  return getUser()
 }

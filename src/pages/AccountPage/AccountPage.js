@@ -6,7 +6,8 @@ export default function AccountPage (props) {
   const [account, setAccount] = useState({
     nickname: '',
     currentBalance: 0,
-    transactions: []
+    transactions: [],
+    type: ''
   })
   const [accIndex, setAccIndex] = useState(0)
 
@@ -27,10 +28,10 @@ export default function AccountPage (props) {
   return (
     <main>
       <h1>{account.nickname}</h1>
-      <h2>Current Balance: {account.currentBalance.toFixed(2)}</h2>
+      <h2>Current Balance: {account.type === 'Bank Account' ? <span className='stonks'>{account.currentBalance.toFixed(2)}</span> : <span className='no-stonks'>{account.currentBalance.toFixed(2)}</span>}</h2>
       <br />
       <h3>New Transaction</h3>
-      <NewTransactionForm user={props.user} setUser={props.setUser} link={props.link} page={props.page} accIndex={accIndex} />
+      <NewTransactionForm user={props.user} setUser={props.setUser} link={props.link} page={props.page} accIndex={accIndex} accType={account.type} />
       <br />
       <h3>Transaction History</h3>
       <TransactionTable user={props.user} setUser={props.setUser} link={props.link} page={props.page} transactions={account.transactions} accIndex={accIndex} renderAcc={false} />

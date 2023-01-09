@@ -39,9 +39,25 @@ export default function NewTransactionForm (props) {
     event.preventDefault()
     try {
       const userData = { ...props.user }
-      const parsedBal = parseFloat(userData.accounts[props.accIndex].currentBalance).toFixed(2)
-      const parsedValue = parseFloat(formData.value).toFixed(2)
-      userData.accounts[props.accIndex].currentBalance = parsedBal - parsedValue
+      const parsedBal = parseFloat(userData.accounts[props.accIndex].currentBalance)
+      const parsedValue = parseFloat(formData.value)
+      
+      if (props.accType === 'Bank Account') {
+        if (formData.type === 'Charge') {
+          userData.accounts[props.accIndex].currentBalance = (parsedBal - parsedValue)
+        } else {
+          userData.accounts[props.accIndex].currentBalance = (parsedBal + parsedValue)
+        }
+      } else {
+        if (formData.type === 'Charge') {
+          userData.accounts[props.accIndex].currentBalance = (parsedBal + parsedValue)
+        } else {
+          userData.accounts[props.accIndex].currentBalance = (parsedBal - parsedValue)
+        }
+      }
+
+      console.log((userData.accounts[props.accIndex].currentBalance).toFixed(2))
+
       userData.accounts[props.accIndex].transactions.push(formData)
       props.setUser(await update(userData))
       setStatus('New transaction created!')
