@@ -31,10 +31,17 @@ export default function NewTransactionForm (props) {
     } else { setDisable(true) }
   }, [formData])
 
+  useEffect(() => {
+    setStatus('')
+  }, [props.link, props.page])
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
       const userData = { ...props.user }
+      const parsedBal = parseFloat(userData.accounts[props.accIndex].currentBalance).toFixed(2)
+      const parsedValue = parseFloat(formData.value).toFixed(2)
+      userData.accounts[props.accIndex].currentBalance = parsedBal - parsedValue
       userData.accounts[props.accIndex].transactions.push(formData)
       props.setUser(await update(userData))
       setStatus('New transaction created!')

@@ -1,7 +1,10 @@
+import { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Nav from 'react-bootstrap/Nav'
 
 export default function TransactionTable (props) {
+  const [transactions, setTransactions] = useState(null)
+  
   const handleClick = (itemId, operation) => {
     if (operation === 'edit') {
       // edit code
@@ -9,6 +12,20 @@ export default function TransactionTable (props) {
       // delete code
     }
   }
+
+  useEffect(() => {
+    setTransactions(props.user.accounts[props.accIndex].transactions.map(transaction =>
+      <tr key={transaction._id}>
+          {props.renderAccEl ? <th>{props.user.accounts[props.accIndex].nickname}</th> : ''}
+          <td>{transaction.date.substr(0, 10)}</td>
+          <td>{transaction.type === 'Debit' ? <span className="stonks">{transaction.value.toFixed(2)}</span> : `-${transaction.value.toFixed(2)}`}</td>
+          <td>{transaction.description}</td>
+          <td>
+            <Nav.Link className='options-col edit' href='#' onClick={() => handleClick(transaction._id, 'edit')}>Edit</Nav.Link> | <Nav.Link className='options-col delete' href='#' onClick={() => handleClick(transaction._id, 'delete')}>Delete</Nav.Link>
+          </td>
+      </tr>
+    ))
+  }, [props.user, props.link, props.page])
 
   return (
     <Table bordered hover>
@@ -22,16 +39,7 @@ export default function TransactionTable (props) {
         </tr>
       </thead>
       <tbody>
-        {/* MAP A TR ELEMENT FOR EACH TRANSACTION PASSED THROUGH PROPS. TR SHOWN BELOW IS A PLACEHOLDER */}
-        <tr>
-          {props.renderAccEl ? <th>Account</th> : ''}
-          <td>1/9/2023</td>
-          <td>9,001</td>
-          <td>Power level</td>
-          <td>
-            <Nav.Link className='options-col edit' href='#' onClick={() => handleClick('ID GOES HERE', 'edit')}>Edit</Nav.Link> | <Nav.Link className='options-col delete' href='#' onClick={() => handleClick('ID GOES HERE', 'delete')}>Delete</Nav.Link>
-          </td>
-        </tr>
+        {transactions}
       </tbody>
     </Table>
   )

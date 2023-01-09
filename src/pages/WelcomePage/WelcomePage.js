@@ -7,9 +7,8 @@ export default function WelcomePage ({ link, navigate, handleClick }) {
   }, [link])
 
   return (
-    <>
+    <main className="welcome">
       <h1>Welcome to BudgIt!</h1>
-      <hr />
       <h2>BudgIt is a free, simple, and fast expense tracker app. Get started today!</h2>
       <br />
       <div className='button-wrapper'>
@@ -17,6 +16,6 @@ export default function WelcomePage ({ link, navigate, handleClick }) {
         <br /><br />
         <Button href='/login' onClick={(e) => handleClick(e, '/login')}>LOGIN</Button>
       </div>
-    </>
+    </main>
   )
 }

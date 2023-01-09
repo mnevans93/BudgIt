@@ -15,9 +15,4 @@ const accountSchema = new Schema({
   toJSON: { virtuals: true }
 })
 
-accountSchema.methods.calcCurrentBalance = async function () {
-  this.currentBalance = (this.transactions.reduce((total, transaction) => total + transaction.value, this.initBalance)).toFixed(2)
-  return this.save()
-}
-
 module.exports = accountSchema

@@ -18,12 +18,24 @@ html, body, #root, .App {
     text-align: center;
 }
 
-main {
+main.App {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 90%;
+}
+
+main.App > main {
+    position: absolute;
+    top: 0;
+    width: 90%;
+    padding-top: 62px;
+}
+
+main.App > main.welcome, main.App > main.auth {
+    position: static;
+    padding-top: 0;
 }
 
 div.button-wrapper > a.btn, a.btn.btn-primary, button.btn {
@@ -48,12 +60,6 @@ div.button-wrapper > a.btn, a.btn.btn-primary, button.btn {
     background-color: $app-secondary-bg;
     border: $app-maintext solid 1px;
     opacity: 0.3;
-}
-
-.main-nav {
-    position: absolute;
-    width: 100%;
-    top: 0;
 }
 
 span.navbar-brand {

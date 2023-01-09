@@ -31,7 +31,7 @@ export default function NavBar ({ user, setUser, page, link, setLink, navigate, 
   return (
     user
       ? <div className='main-nav'>
-        <Navbar bg='primary' expand='false' className='mb-3' collapseOnSelect='true'>
+        <Navbar fixed="top" bg='primary' expand='false' className='mb-3' collapseOnSelect='true'>
           <Container fluid>
             <Navbar.Brand>{page}</Navbar.Brand>
             <Navbar.Toggle aria-controls='offcanvasNavbar-expand-expand' />

@@ -6,6 +6,8 @@ export default function OptionsPage (props) {
   })
 
   return (
-    <h1>Options Page</h1>
+    <main>
+      <h1>Options Page</h1>
+    </main>
   )
 }

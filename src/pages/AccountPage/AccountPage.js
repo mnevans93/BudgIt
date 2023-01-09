@@ -30,10 +30,10 @@ export default function AccountPage (props) {
       <h2>Current Balance: {account.currentBalance.toFixed(2)}</h2>
       <br />
       <h3>New Transaction</h3>
-      <NewTransactionForm user={props.user} setUser={props.setUser} accIndex={accIndex} />
+      <NewTransactionForm user={props.user} setUser={props.setUser} link={props.link} page={props.page} accIndex={accIndex} />
       <br />
       <h3>Transaction History</h3>
-      <TransactionTable transactions={account.transactions} renderAcc={false} />
+      <TransactionTable user={props.user} setUser={props.setUser} link={props.link} page={props.page} transactions={account.transactions} accIndex={accIndex} renderAcc={false} />
     </main>
   )
 }

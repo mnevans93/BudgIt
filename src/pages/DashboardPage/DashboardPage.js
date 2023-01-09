@@ -11,12 +11,12 @@ export default function DashboardPage (props) {
   return (
     accounts.length !== 0
       ? <main>
-        <h1>Dashboard Page</h1>
+          <h1>Dashboard Page</h1>
         </main>
       : <main>
-        <h1>Looks like you don't have any accounts set up. Let's create one!</h1>
-        <br />
-        <NewAccountForm user={props.user} setUser={props.setUser} getUser={props.getUser} link={props.link} setLink={props.setLink} navigate={props.navigate} />
+          <h1>Looks like you don't have any accounts set up. Let's create one!</h1>
+          <br />
+          <NewAccountForm user={props.user} setUser={props.setUser} getUser={props.getUser} link={props.link} setLink={props.setLink} navigate={props.navigate} />
       </main>
   )
 }
