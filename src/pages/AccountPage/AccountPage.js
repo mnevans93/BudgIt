@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
+import NewTransactionForm from '../../components/NewTransactionForm/NewTransactionForm'
+import TransactionTable from '../../components/TransactionTable/TransactionTable'
 
 export default function AccountPage (props) {
   const [account, setAccount] = useState({
     nickname: '',
-    currentBalance: 0
+    currentBalance: 0,
+    transactions: []
   })
+  const [accIndex, setAccIndex] = useState(0)
 
   useEffect(() => {
     findAccount(props.link.substr(-24))
@@ -12,9 +16,10 @@ export default function AccountPage (props) {
   })
 
   const findAccount = (linkedId) => {
-    for (const account in props.user.accounts) {
-      if (props.user.accounts[account]._id === linkedId) {
-        setAccount(props.user.accounts[account])
+    for (const index in props.user.accounts) {
+      if (props.user.accounts[index]._id === linkedId) {
+        setAccount(props.user.accounts[index])
+        setAccIndex(index)
       }
     }
   }
@@ -22,7 +27,13 @@ export default function AccountPage (props) {
   return (
     <main>
       <h1>{account.nickname}</h1>
-      <h2>Current Balance: ${account.currentBalance.toFixed(2)}</h2>
+      <h2>Current Balance: {account.currentBalance.toFixed(2)}</h2>
+      <br />
+      <h3>New Transaction</h3>
+      <NewTransactionForm user={props.user} setUser={props.setUser} accIndex={accIndex} />
+      <br />
+      <h3>Transaction History</h3>
+      <TransactionTable transactions={account.transactions} renderAcc={false} />
     </main>
   )
 }

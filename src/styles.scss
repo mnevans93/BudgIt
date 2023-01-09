@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap');
 
 $app-bg: #4f6752;
+$app-secondary-bg: #c4be9c;
 $app-maintext: #01182b;
-$app-stonks: #60c3ac;
-$button-bg: #c4be9c;
+$app-stonkstext: #60c3ac;
 $active: #e46e68;
 
-$offcanvas-bg-color: $button-bg;
+$offcanvas-bg-color: $app-secondary-bg;
 $offcanvas-color: $app-maintext;
 
 html, body, #root, .App {
@@ -26,8 +26,28 @@ main {
     width: 90%;
 }
 
-div.button-wrapper > a.btn, A.btn.btn-primary, button.btn {
+div.button-wrapper > a.btn, a.btn.btn-primary, button.btn {
     min-width: 100px;
+}
+
+.btn.btn-primary {
+    color: $app-maintext;
+    background-color: $app-secondary-bg;
+    border: $app-maintext solid 1px;
+}
+
+.btn.btn-primary:hover {
+    color: $app-maintext;
+    background-color: $active;
+    border: $app-maintext solid 1px;
+    transition-duration: .3s;
+}
+
+.btn.btn-primary:disabled {
+    color: $app-maintext;
+    background-color: $app-secondary-bg;
+    border: $app-maintext solid 1px;
+    opacity: 0.3;
 }
 
 .main-nav {
@@ -48,7 +68,7 @@ hr {
 
 .dropdown-menu.show {
     text-align: center;
-    background-color: $button-bg;
+    background-color: $app-secondary-bg;
     padding: 0;
 }
 
@@ -60,9 +80,14 @@ a.nav-link, a.dropdown-item {
     border-radius: 15px;
 }
 
-a.nav-link:hover, a.dropdown-item:hover {
-    background-color: $app-bg;
+a.nav-link:hover, a.dropdown-item:hover, button.navbar-toggler:hover {
+    background-color: $active;
     transition-duration: .3s;
+}
+
+button.navbar-toggler, button.navbar-toggler.collapsed {
+    border: $app-maintext solid 1px;
+    box-shadow: none;
 }
 
 Form {
@@ -70,12 +95,28 @@ Form {
     margin: auto;
 }
 
+Form.new-transaction {
+    width: 100%;
+}
+
+table.table.table-bordered {
+    border: $app-maintext solid 1px;
+    background-color: $app-secondary-bg;
+}
+
+a.nav-link.options-col {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: $app-maintext solid 1px;
+}
+
 .error-message, .warning-message {
     color: $active;
 }
 
 $theme-colors: (
-    "primary": $button-bg,
+    "primary": $app-secondary-bg
 );
 
 @import "~bootstrap/scss/bootstrap"
