@@ -12,15 +12,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
 
 export default function App () {
-  let navigate = useNavigate()
+  const navigate = useNavigate()
   const [user, setUser] = useState(getUser())
   const [page, setPage] = useState('My Dashboard')
   const [link, setLink] = useState('/welcome')
-    
+
   const handleClick = (e, link) => {
-      console.log(user)
-      e.preventDefault()
-      setLink(link)
+    e.preventDefault()
+    setLink(link)
   }
 
   return (
@@ -35,13 +34,13 @@ export default function App () {
             <Route path='/options' element={<OptionsPage page={page} setPage={setPage} user={user} setUser={setUser} />} />
             <Route path='/*' element={<Navigate to='/dashboard' />} />
           </Routes>
-        </>
+          </>
         : <Routes>
-            <Route path='/signup' element={<AuthPage setUser={setUser} form='signup' link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />} />
-            <Route path='/login' element={<AuthPage setUser={setUser} form='login' link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />} />
-            <Route path='/welcome' element={<WelcomePage link={link} setLink={setLink} handleClick={handleClick} navigate={navigate} />} />
-            <Route path='/*' element={<Navigate to='/welcome' />} />
-          </Routes>}
+          <Route path='/signup' element={<AuthPage setUser={setUser} form='signup' link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />} />
+          <Route path='/login' element={<AuthPage setUser={setUser} form='login' link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />} />
+          <Route path='/welcome' element={<WelcomePage link={link} setLink={setLink} handleClick={handleClick} navigate={navigate} />} />
+          <Route path='/*' element={<Navigate to='/welcome' />} />
+        </Routes>}
     </main>
   )
 }

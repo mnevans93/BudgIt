@@ -45,27 +45,27 @@ export default function SignUpForm ({ setUser, link, navigate, handleClick }) {
       <h1>Welcome to BudgIt! Sign up to get started.</h1>
       <br />
       <Form className='text-center' onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasic">
+        <Form.Group className='mb-3' controlId='formBasic'>
           <Form.Label>Name</Form.Label>
-          <Form.Control type='text' name='name' value={credentials.name} onChange={handleChange} placeholder="Enter your name" required />
+          <Form.Control type='text' name='name' value={credentials.name} onChange={handleChange} placeholder='Enter your name' required />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder="Enter your email" required />
+          <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder='Enter your email' required />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' name='password' value={credentials.password} onChange={handleChange} placeholder="Password" required />
+          <Form.Control type='password' name='password' value={credentials.password} onChange={handleChange} placeholder='Password' required />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicConfirm">
+        <Form.Group className='mb-3' controlId='formBasicConfirm'>
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control type='password' name='confirm' value={credentials.confirm} onChange={handleChange} placeholder="Confirm password" required />
+          <Form.Control type='password' name='confirm' value={credentials.confirm} onChange={handleChange} placeholder='Confirm password' required />
         </Form.Group>
-        <Button variant="primary" type="submit" disabled={disable} >SIGN UP</Button>
+        <Button variant='primary' type='submit' disabled={disable}>SIGN UP</Button>
         <br /><p className='error-message'>&nbsp;{credentials.error}</p>
       </Form>
       <h3>Already have an account?</h3>
-      <Button href="/login" onClick={(e) => handleClick(e, '/login')}>LOGIN</Button>
+      <Button href='/login' onClick={(e) => handleClick(e, '/login')}>LOGIN</Button>
     </>
   )
 }

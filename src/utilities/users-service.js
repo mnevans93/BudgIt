@@ -33,6 +33,7 @@ export function logOut () {
 }
 
 export async function update (userData) {
+  window.localStorage.removeItem('token')
   const token = await usersAPI.update(userData)
   window.localStorage.setItem('token', token)
   return getUser()

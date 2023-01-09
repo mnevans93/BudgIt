@@ -34,7 +34,7 @@ const dataController = {
   },
   async update (req, res, next) {
     try {
-      const user = await User.findByIdAndUpdate(req.body._id, req.body)
+      const user = await User.findByIdAndUpdate(req.body._id, req.body, { new: true })
       if (!user) throw new Error()
       res.locals.data.user = user
       res.locals.data.token = createJWT(user)

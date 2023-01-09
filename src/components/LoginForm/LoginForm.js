@@ -30,26 +30,26 @@ export default function LoginForm ({ setUser, link, navigate, handleClick }) {
     }
   }
 
-  const disable = credentials.password ? false : true
+  const disable = !credentials.password
 
   return (
     <>
       <h1>Welcome back! Sign in below to pick up where you left off.</h1>
       <br />
       <Form className='text-center' onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder="Enter your email" required />
+          <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder='Enter your email' required />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' name='password' value={credentials.password} onChange={handleChange} placeholder="Password" required />
+          <Form.Control type='password' name='password' value={credentials.password} onChange={handleChange} placeholder='Password' required />
         </Form.Group>
-        <Button variant="primary" type="submit" disabled={disable}>LOG IN</Button>
+        <Button variant='primary' type='submit' disabled={disable}>LOG IN</Button>
         <br /><p className='error-message'>&nbsp;{error}</p>
       </Form>
       <h3>New to BudgIt?</h3>
-      <Button href="/signup" onClick={(e) => handleClick(e, '/signup')}>SIGN UP</Button>
+      <Button href='/signup' onClick={(e) => handleClick(e, '/signup')}>SIGN UP</Button>
     </>
   )
 }
