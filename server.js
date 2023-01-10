@@ -25,7 +25,7 @@ app.use('/api/users', require('./routes/api/users'))
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
-  res.redirect('/login')
+  res.redirect('/')
 })
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`)
