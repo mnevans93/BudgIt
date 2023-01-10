@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { sortArrayByDate } from '../../utilities/array-sorting'
 import Table from 'react-bootstrap/Table'
 import Nav from 'react-bootstrap/Nav'
 
@@ -6,7 +7,7 @@ export default function TransactionTable ( {handleClick, user, accIndex, renderA
   const [transactions, setTransactions] = useState(null)
 
   const sortAndMap = () => {
-    // const userData = {...user}
+    sortArrayByDate(user.accounts[accIndex].transactions)
     return user.accounts[accIndex].transactions.map(element =>
       <tr key={element._id}>
           {renderAccEl ? <th>{user.accounts[accIndex].nickname}</th> : ''}

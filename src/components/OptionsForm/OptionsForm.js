@@ -63,6 +63,7 @@ export default function OptionsForm({ user, setUser }) {
                     <Form.Label>Email</Form.Label>
                     <Form.Control type='email' name='email' value={credentials.email} onChange={handleChange} placeholder='Enter your email' required />
                 </Form.Group>
+                {/* PASSWORD EDITING FUNCTIONALITY IS CURRENTLY DISABLED */}
                 {/* <Form.Group className='mb-3' controlId='formBasicPassword'>
                     <Form.Label>Update Password</Form.Label>
                     <Form.Control type='password' name='password' value={credentials.password} onChange={handleChange} placeholder='Password' required />
@@ -72,7 +73,7 @@ export default function OptionsForm({ user, setUser }) {
                     <Form.Control type='password' name='confirm' value={credentials.confirm} onChange={handleChange} placeholder='Confirm password' required />
                 </Form.Group> */}
                 <Button variant='primary' type='submit' disabled={disable}>UPDATE INFO</Button>
-                <br /><p className='error-message'>&nbsp;{status}</p>
+                <br /><p>&nbsp;{status}</p>
             </Form>
         </>
     )

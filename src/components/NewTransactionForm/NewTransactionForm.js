@@ -60,7 +60,7 @@ export default function NewTransactionForm ( { setFormData, formData, setStatus,
         </Col>
       </Row>
       <Button variant='primary' type='submit' disabled={disable}>CREATE NEW TRANSACTION</Button>
-      <br /><p className='error-message'>&nbsp;{status}</p>
+      <br /><p>&nbsp;{status}</p>
     </Form>
   )
 }
