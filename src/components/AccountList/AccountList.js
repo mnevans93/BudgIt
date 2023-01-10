@@ -52,7 +52,7 @@ export default function AccountList ({ user, setUser, accounts, status, setStatu
   }
 
   return (
-    <Carousel interval={null} indicators onSelect={setActiveIndex} activeIndex={activeIndex} >
+    <Carousel interval={null} indicators touch={false} onSelect={setActiveIndex} activeIndex={activeIndex} >
       {accounts.map((el, i) => 
         <Carousel.Item key={el._id} >
           <AccountListItem nickname={el.nickname} type={el.type} currentBalance={el.currentBalance} />

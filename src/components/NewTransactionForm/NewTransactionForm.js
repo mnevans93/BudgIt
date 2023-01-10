@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import validInput from '../../utilities/check-input'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
@@ -8,10 +9,12 @@ export default function NewTransactionForm ( { setFormData, formData, setStatus,
   const [disable, setDisable] = useState(true)
 
   const handleChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    })
+    if (validInput(event, 'description')) {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value
+      })
+    }
     if (formData.date && formData.value && formData.type) {
       setDisable(false)
     } else { setDisable(true) }

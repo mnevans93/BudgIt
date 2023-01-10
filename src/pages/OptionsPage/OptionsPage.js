@@ -20,7 +20,6 @@ export default function OptionsPage (props) {
       props.setLink('/welcome')
       props.setPage('')
     } catch (error) {
-      console.log(error)
       setStatus('Sorry, something went wrong. Try again later.')
     }
   }

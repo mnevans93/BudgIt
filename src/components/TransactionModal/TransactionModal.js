@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import validInput from '../../utilities/check-input'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
@@ -13,10 +14,12 @@ export default function TransactionModal ({ operation, show, handleClose, handle
     const [disable, setDisable] = useState(false)
 
     const handleChange = (event) => {
-        setUpdateData({
-          ...updateData,
-          [event.target.name]: event.target.value
-        })
+        if (validInput(event, 'description')) {
+            setUpdateData({
+            ...updateData,
+            [event.target.name]: event.target.value
+            })
+        }
         if (updateData.date && updateData.value && updateData.type) {
           setDisable(false)
         } else { setDisable(true) }

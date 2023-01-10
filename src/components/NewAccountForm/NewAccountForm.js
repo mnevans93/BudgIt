@@ -17,6 +17,10 @@ export default function NewAccountForm ({ user, setUser, setLink, setPage, navig
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    if (!checkIfUnique()) {
+      setStatus('You already have an account with that nickname. Account was not created.')
+      return
+    }
     try {
       accInfo.currentBalance = accInfo.initBalance
       const initType = accInfo.type === 'Bank Account' ? 'Debit' : 'Charge'
@@ -57,6 +61,15 @@ export default function NewAccountForm ({ user, setUser, setLink, setPage, navig
     if (accInfo.nickname !== '' && accInfo.type !== '') {
       setDisable(false)
     } else { setDisable(true) }
+  }
+
+  const checkIfUnique = () => {
+    for (const acc in user.accounts) {
+      if (accInfo.nickname == user.accounts[acc].nickname) {
+        return false
+      }
+    }
+    return true
   }
 
   return (
