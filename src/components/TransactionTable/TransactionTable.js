@@ -5,8 +5,9 @@ import Nav from 'react-bootstrap/Nav'
 export default function TransactionTable ( {handleClick, user, accIndex, renderAccEl, link, page} ) {
   const [transactions, setTransactions] = useState(null)
 
-  useEffect(() => {
-    setTransactions(user.accounts[accIndex].transactions.map(element =>
+  const sortAndMap = () => {
+    // const userData = {...user}
+    return user.accounts[accIndex].transactions.map(element =>
       <tr key={element._id}>
           {renderAccEl ? <th>{user.accounts[accIndex].nickname}</th> : ''}
           <td>{element.date.substr(0, 10)}</td>
@@ -16,7 +17,11 @@ export default function TransactionTable ( {handleClick, user, accIndex, renderA
             <Nav.Link className='options-col' href='#' onClick={() => handleClick(element, 'edit')}>EDIT</Nav.Link> &nbsp; <Nav.Link className='options-col' href='#' onClick={() => handleClick(element, 'delete')}>DELETE</Nav.Link>
           </td>
       </tr>
-    ))
+    )
+  }
+
+  useEffect(() => {
+    setTransactions(sortAndMap)
   }, [user, link, page])
 
   return (

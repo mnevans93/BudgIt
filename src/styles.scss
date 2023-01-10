@@ -38,6 +38,29 @@ main.App > main.static {
     padding-top: 0;
 }
 
+main.App > main.carousel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+a.carousel-control-prev {
+    align-items: flex-start;
+    top: 5px;
+    justify-content: flex-start;
+}
+
+a.carousel-control-next {
+    align-items: flex-start;
+    top: 5px;
+    justify-content: flex-end;
+}
+
+div.carousel-indicators {
+    top: 100%;
+}
+
 div.button-wrapper > a.btn, a.btn.btn-primary, button.btn {
     min-width: 100px;
 }

@@ -188,7 +188,7 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
       <h3>New Transaction</h3>
       <NewTransactionForm setFormData={setFormData} formData={formData} setStatus={setStatus} status={status} link={link} page={page} handleSubmit={transactionSubmit} />
       <h3>Transaction History</h3>
-      <TransactionTable handleClick={handleClick} handleShow={handleShowT} setOperation={setOperation} user={user} accIndex={accIndex} renderAcc={false} link={link} page={page} />
+      <TransactionTable handleClick={handleClick} handleShow={handleShowT} setOperation={setOperation} user={user} setUser={setUser} accIndex={accIndex} renderAcc={false} link={link} page={page} />
       <TransactionModal operation={operation} show={showT} handleClose={handleCloseT} handleEdit={transactionEdit} handleDelete={transactionDelete} updateData={updateData} setUpdateData={setUpdateData} />
       <AccountModal show={showA} handleShow={handleShowA} handleClose={handleCloseA} handleDelete={accountDelete} />
     </main>

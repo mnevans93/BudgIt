@@ -10,7 +10,8 @@ const transactionSchema = new Schema({
     enum: ['Charge', 'Debit']
   }
 }, {
-  toJSON: { virtuals: true }
+  toJSON: { virtuals: true },
+  id: false
 })
 
 module.exports = transactionSchema

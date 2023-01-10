@@ -12,7 +12,8 @@ const accountSchema = new Schema({
   transactions: [transactionSchema],
   currentBalance: { type: Number, required: true }
 }, {
-  toJSON: { virtuals: true }
+  toJSON: { virtuals: true },
+  id: false
 })
 
 module.exports = accountSchema
