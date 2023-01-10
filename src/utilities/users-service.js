@@ -19,6 +19,12 @@ export async function update (userData) {
   return getUser()
 }
 
+export async function deleteUser (userData) {
+  window.localStorage.removeItem('token')
+  await usersAPI.deleteUser(userData)
+  return null
+}
+
 export function getToken () {
   const token = window.localStorage.getItem('token')
   if (!token) return null

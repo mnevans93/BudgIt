@@ -32,7 +32,7 @@ export default function App () {
             <Route path='/dashboard' element={<DashboardPage page={page} setPage={setPage} user={user} setUser={setUser} setLink={setLink} navigate={navigate} getUser={getUser} status={status} setStatus={setStatus} />} />
             <Route path='/accounts/new' element={<NewAccountPage page={page} setPage={setPage} link={link} setLink={setLink} user={user} setUser={setUser} status={status} setStatus={setStatus} />} />
             <Route path='/accounts/*' element={<AccountPage link={link} setLink={setLink} page={page} setPage={setPage} user={user} setUser={setUser} navigate={navigate} status={status} setStatus={setStatus} />} />
-            <Route path='/options' element={<OptionsPage page={page} setPage={setPage} user={user} setUser={setUser} />} />
+            <Route path='/options' element={<OptionsPage link={link} setLink={setLink} navigate={navigate} page={page} setPage={setPage} user={user} setUser={setUser} />} />
             <Route path='/*' element={<Navigate to='/dashboard' />} />
           </Routes>
           </>

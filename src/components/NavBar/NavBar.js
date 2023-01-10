@@ -58,7 +58,7 @@ export default function NavBar ({ user, setUser, page, link, setLink, navigate, 
                     <hr />
                     <NavDropdown.Item href='/accounts/new' onClick={(e) => handleClick(e, '/accounts/new')}>Add a new account</NavDropdown.Item>
                   </NavDropdown>
-                  <Nav.Link href='/options' onClick={(e) => handleClick(e, '/options')}>Options</Nav.Link>
+                  <Nav.Link href='/options' onClick={(e) => handleClick(e, '/options')}>User Options</Nav.Link>
                   <Nav.Link href='/welcome' onClick={(e) => handleLogout(e)}>Logout</Nav.Link>
                 </Nav>
               </Offcanvas.Body>

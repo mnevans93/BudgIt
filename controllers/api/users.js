@@ -41,6 +41,14 @@ const dataController = {
     } catch {
       res.status(400).json('Update failed.')
     }
+  },
+  async deleteUser (req, res, next) {
+    try {
+      const user = await User.findByIdAndDelete(req.body._id)
+      next()
+    } catch {
+      res.status(400).json('Account deletion failed.')
+    }
   }
 }
 

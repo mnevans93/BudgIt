@@ -13,3 +13,7 @@ export function login (credentials) {
 export function update (userData) {
   return sendRequest(`${BASE_URL}/${userData._id}`, 'PUT', userData)
 }
+
+export function deleteUser (userData) {
+  return sendRequest(`${BASE_URL}/${userData._id}`, 'DELETE', userData)
+}
