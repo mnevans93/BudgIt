@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { update } from '../../utilities/users-service'
+import generateDate from '../../utilities/generate-date'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -17,6 +18,14 @@ export default function NewAccountForm ({ user, setUser, setLink, setPage, navig
     event.preventDefault()
     try {
       accInfo.currentBalance = accInfo.initBalance
+      const initType = accInfo.type === 'Bank Account' ? 'Debit' : 'Charge'
+      const date = generateDate()
+      accInfo.transactions.push({
+        date: date,
+        value: accInfo.initBalance,
+        description: 'Initial balance',
+        type: initType
+      })
       const userData = { ...user }
       const accNickname = accInfo.nickname
       userData.accounts.push(accInfo)
