@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { update } from '../../utilities/users-service'
+import validInput from '../../utilities/check-input'
 import generateDate from '../../utilities/generate-date'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -47,10 +48,12 @@ export default function NewAccountForm ({ user, setUser, setLink, setPage, navig
   }
 
   const handleChange = (event) => {
-    setAccInfo({
-      ...accInfo,
-      [event.target.name]: event.target.value
-    })
+    if (validInput(event, 'nickname')) {
+      setAccInfo({
+        ...accInfo,
+        [event.target.name]: event.target.value
+      })
+    }
     if (accInfo.nickname !== '' && accInfo.type !== '') {
       setDisable(false)
     } else { setDisable(true) }

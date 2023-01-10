@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { update } from '../../utilities/users-service'
+import validInput from '../../utilities/check-input'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -34,10 +35,12 @@ export default function OptionsForm({ user, setUser }) {
     }
     
     const handleChange = (event) => {
-        setCredentials({
+        if (validInput(event, 'name')) {
+          setCredentials({
             ...credentials,
             [event.target.name]: event.target.value
-        })
+          })
+        }
     }
 
     const updateDisable = () => {

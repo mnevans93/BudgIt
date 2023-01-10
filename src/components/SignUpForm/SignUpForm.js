@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { redirect } from 'react-router-dom'
 import { signUp } from '../../utilities/users-service'
+import validInput from '../../utilities/check-input'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -32,10 +33,12 @@ export default function SignUpForm ({ setUser, link, navigate, handleClick }) {
   }
 
   const handleChange = (event) => {
-    setCredentials({
-      ...credentials,
-      [event.target.name]: event.target.value
-    })
+    if (validInput(event, 'name')) {
+      setCredentials({
+        ...credentials,
+        [event.target.name]: event.target.value
+      })
+    }
   }
 
   const disable = credentials.password ? (credentials.password !== credentials.confirm) : true

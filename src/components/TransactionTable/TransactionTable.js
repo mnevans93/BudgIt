@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { sortArrayByDate } from '../../utilities/array-sorting'
+import sortArrayByDate from '../../utilities/array-sorting'
 import Table from 'react-bootstrap/Table'
 import Nav from 'react-bootstrap/Nav'
 

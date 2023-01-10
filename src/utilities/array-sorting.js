@@ -1,4 +1,4 @@
-export function sortArrayByDate (arr) {
+export default function sortArrayByDate (arr) {
     return arr.sort((a, b) => {
         const first = new Date(a.date)
         const second = new Date(b.date)
