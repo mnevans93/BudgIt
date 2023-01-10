@@ -31,6 +31,20 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
   
   const [operation, setOperation] = useState('edit')
 
+  const [targetTransaction, setTargetTransaction] = useState({
+    date: '',
+    value: '',
+    description: '',
+    type: ''
+  })
+
+  const [updateData, setUpdateData] = useState({
+    date: '',
+    value: '',
+    description: '',
+    type: ''
+  })
+
   useEffect(() => {
     findAccount(link.substr(-24))
     setPage(`${account.type}: ${account.nickname}`)
@@ -51,19 +65,7 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
       const userData = { ...user }
       const parsedBal = parseFloat(userData.accounts[accIndex].currentBalance)
       const parsedValue = parseFloat(formData.value)
-      if (account.type === 'Bank Account') {
-        if (formData.type === 'Charge') {
-          userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
-        } else {
-          userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
-        }
-      } else {
-        if (formData.type === 'Charge') {
-          userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
-        } else {
-          userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
-        }
-      }
+      applyTransaction(userData, formData, parsedBal, parsedValue)
       userData.accounts[accIndex].transactions.push(formData)
       setUser(await update(userData))
       setStatus('New transaction created!')
@@ -79,11 +81,50 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
   }
 
   const transactionEdit = async () => {
-
+    try {
+      const userData = { ...user }
+      for (const i in userData.accounts[accIndex].transactions) {
+        const transaction = userData.accounts[accIndex].transactions[i]
+        if (transaction._id === targetTransaction._id) {
+          const parsedBal = parseFloat(userData.accounts[accIndex].currentBalance)
+          const parsedValue = parseFloat(transaction.value)
+          userData.accounts[accIndex].transactions.splice(i, 1)
+          undoTransaction(userData, transaction, parsedBal, parsedValue)
+        }
+      }
+      const parsedBal = parseFloat(userData.accounts[accIndex].currentBalance)
+      const parsedValue = parseFloat(updateData.value)
+      applyTransaction(userData, updateData, parsedBal, parsedValue)
+      userData.accounts[accIndex].transactions.push(updateData)
+      setUser(await update(userData))
+      setStatus('Transaction updated!')
+      setUpdateData({
+        date: '',
+        value: '',
+        description: '',
+        type: ''
+      })
+    } catch (error) {
+      setStatus('Sorry, something went wrong. Try again later.')
+    }
   }
 
   const transactionDelete = async () => {
-
+    try {
+      const userData = { ...user }
+      for (const i in userData.accounts[accIndex].transactions) {
+        const transaction = userData.accounts[accIndex].transactions[i]
+        if (transaction._id === targetTransaction._id) {
+          const parsedBal = parseFloat(userData.accounts[accIndex].currentBalance)
+          const parsedValue = parseFloat(transaction.value)
+          userData.accounts[accIndex].transactions.splice(i, 1)
+          undoTransaction(userData, transaction, parsedBal, parsedValue)
+        }
+      }
+      setUser(await update(userData))
+    } catch (error) {
+      setStatus('Sorry, something went wrong. Try again later.')
+    }
   }
 
   const accountDelete = async () => {
@@ -99,6 +140,46 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
     }
   }
 
+  const applyTransaction = (userData, formData, parsedBal, parsedValue) => {
+    if (account.type === 'Bank Account') {
+      if (formData.type === 'Charge') {
+        userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
+      } else {
+        userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
+      }
+    } else {
+      if (formData.type === 'Charge') {
+        userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
+      } else {
+        userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
+      }
+    }
+  }
+
+  const undoTransaction = (userData, transaction, parsedBal, parsedValue) => {
+    if (account.type === 'Bank Account') {
+      if (transaction.type === 'Charge') {
+        userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
+      } else {
+        userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
+      }
+    } else {
+      if (transaction.type === 'Charge') {
+        userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
+      } else {
+        userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
+      }
+    }
+  }
+
+  const handleClick = (element, op) => {
+    setOperation(op)
+    setTargetTransaction(element)
+    setUpdateData(element)
+    setStatus('')
+    handleShowT()
+  }
+
   return (
     <main>
       <h1>{account.nickname}</h1>
@@ -107,8 +188,8 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
       <h3>New Transaction</h3>
       <NewTransactionForm setFormData={setFormData} formData={formData} setStatus={setStatus} status={status} link={link} page={page} handleSubmit={transactionSubmit} />
       <h3>Transaction History</h3>
-      <TransactionTable handleShow={handleShowT} setOperation={setOperation} user={user} accIndex={accIndex} renderAcc={false} link={link} page={page} />
-      <TransactionModal operation={operation} show={showT} handleClose={handleCloseT} handleEdit={transactionEdit} handleDelete={transactionDelete} />
+      <TransactionTable handleClick={handleClick} handleShow={handleShowT} setOperation={setOperation} user={user} accIndex={accIndex} renderAcc={false} link={link} page={page} />
+      <TransactionModal operation={operation} show={showT} handleClose={handleCloseT} handleEdit={transactionEdit} handleDelete={transactionDelete} updateData={updateData} setUpdateData={setUpdateData} />
       <AccountModal show={showA} handleShow={handleShowA} handleClose={handleCloseA} handleDelete={accountDelete} />
     </main>
   )

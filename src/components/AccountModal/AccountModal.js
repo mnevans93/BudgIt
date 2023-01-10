@@ -10,7 +10,7 @@ export default function AccountModal ({ show, handleShow, handleClose, handleDel
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Delete This Account
+        DELETE THIS ACCOUNT
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -20,10 +20,10 @@ export default function AccountModal ({ show, handleShow, handleClose, handleDel
         <Modal.Body>Are you sure you want to delete this account? This cannot be undone.</Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
-            Cancel
+            CANCEL
           </Button>
           <Button variant="primary" onClick={handleClick}>
-            Delete Account
+            DELETE ACCOUNT
           </Button>
         </Modal.Footer>
       </Modal>
