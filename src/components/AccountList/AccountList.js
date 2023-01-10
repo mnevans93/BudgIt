@@ -5,7 +5,6 @@ import NewTransactionForm from '../NewTransactionForm/NewTransactionForm'
 import Carousel from 'react-bootstrap/Carousel'
 
 export default function AccountList ({ user, setUser, accounts, status, setStatus, link, page }) {
-  
   const [formData, setFormData] = useState({
     date: '',
     value: '',
@@ -15,22 +14,14 @@ export default function AccountList ({ user, setUser, accounts, status, setStatu
 
   const [activeIndex, setActiveIndex] = useState(0)
 
-  useEffect(() => {
-    setStatus('')
-  }, [activeIndex])
-
-  const submitWrapper = i => event => {
+  const transactionSubmit = async event => {
     event.preventDefault()
-    transactionSubmit(i)
-  }
-
-  const transactionSubmit = async (accIndex) => {
     try {
       const userData = { ...user }
-      const parsedBal = parseFloat(userData.accounts[accIndex].currentBalance)
+      const parsedBal = parseFloat(userData.accounts[activeIndex].currentBalance)
       const parsedValue = parseFloat(formData.value)
-      applyTransaction(userData, accIndex, formData, parsedBal, parsedValue)
-      userData.accounts[accIndex].transactions.push(formData)
+      applyTransaction(userData, activeIndex, formData, parsedBal, parsedValue)
+      userData.accounts[activeIndex].transactions.push(formData)
       setUser(await update(userData))
       setStatus('New transaction created!')
       setFormData({
@@ -44,18 +35,18 @@ export default function AccountList ({ user, setUser, accounts, status, setStatu
     }
   }
 
-  const applyTransaction = (userData, accIndex, formData, parsedBal, parsedValue) => {
-    if (formData.type === 'Bank Account') {
+  const applyTransaction = (userData, activeIndex, formData, parsedBal, parsedValue) => {
+    if (userData.accounts[activeIndex].type === 'Bank Account') {
       if (formData.type === 'Charge') {
-        userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
+        userData.accounts[activeIndex].currentBalance = (parsedBal - parsedValue)
       } else {
-        userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
+        userData.accounts[activeIndex].currentBalance = (parsedBal + parsedValue)
       }
     } else {
       if (formData.type === 'Charge') {
-        userData.accounts[accIndex].currentBalance = (parsedBal + parsedValue)
+        userData.accounts[activeIndex].currentBalance = (parsedBal + parsedValue)
       } else {
-        userData.accounts[accIndex].currentBalance = (parsedBal - parsedValue)
+        userData.accounts[activeIndex].currentBalance = (parsedBal - parsedValue)
       }
     }
   }
@@ -65,7 +56,7 @@ export default function AccountList ({ user, setUser, accounts, status, setStatu
       {accounts.map((el, i) => 
         <Carousel.Item key={el._id} >
           <AccountListItem nickname={el.nickname} type={el.type} currentBalance={el.currentBalance} />
-          <NewTransactionForm formData={formData} setFormData={setFormData} status={status} setStatus={setStatus} link={link} page={page} handleSubmit={submitWrapper(i)} />
+          <NewTransactionForm formData={formData} setFormData={setFormData} status={status} setStatus={setStatus} link={link} page={page} handleSubmit={transactionSubmit} />
         </Carousel.Item>
       )}
     </Carousel>

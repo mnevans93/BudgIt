@@ -47,14 +47,16 @@ main.App > main.carousel-container {
 
 a.carousel-control-prev {
     align-items: flex-start;
-    top: 5px;
     justify-content: flex-start;
+    width: 5%;
+    top: 5px;
 }
 
 a.carousel-control-next {
     align-items: flex-start;
-    top: 5px;
     justify-content: flex-end;
+    width: 5%;
+    top: 5px;
 }
 
 div.carousel-indicators {
