@@ -3,8 +3,8 @@
 $app-bg: #4f6752;
 $app-secondary-bg: #c4be9c;
 $app-maintext: #01182b;
-$app-stonkstext: #528b7e;
-$active-or-error: #e46e68;
+$app-stonkstext: #407064;
+$active-or-error: #ff7971;
 
 $offcanvas-bg-color: $app-secondary-bg;
 $offcanvas-color: $app-maintext;
@@ -33,7 +33,7 @@ main.App > main {
     padding-top: 62px;
 }
 
-main.App > main.welcome, main.App > main.auth {
+main.App > main.static {
     position: static;
     padding-top: 0;
 }
@@ -111,6 +111,10 @@ Form {
 
 Form.new-transaction {
     width: 100%;
+}
+
+div.modal-content {
+    background-color: $app-secondary-bg;
 }
 
 table.table.table-bordered {

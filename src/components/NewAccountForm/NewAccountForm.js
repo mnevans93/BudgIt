@@ -3,7 +3,7 @@ import { update } from '../../utilities/users-service'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-export default function NewAccountForm ({ user, setUser }) {
+export default function NewAccountForm ({ user, setUser, setLink, setPage, navigate, status, setStatus, onDashboard }) {
   const [accInfo, setAccInfo] = useState({
     nickname: '',
     type: '',
@@ -11,7 +11,6 @@ export default function NewAccountForm ({ user, setUser }) {
     transactions: [],
     currentBalance: 0
   })
-  const [status, setStatus] = useState('')
   const [disable, setDisable] = useState(true)
 
   const handleSubmit = async (event) => {
@@ -22,7 +21,7 @@ export default function NewAccountForm ({ user, setUser }) {
       const accNickname = accInfo.nickname
       userData.accounts.push(accInfo)
       setUser(await update(userData))
-      setStatus(`New account "${accNickname}" created! Add another account or navigate back to your Dashboard.`)
+      setStatus(`New account "${accNickname}" created! Add another account or navigate back to your Dashboard.`) 
       setAccInfo({
         nickname: '',
         type: '',
@@ -30,6 +29,9 @@ export default function NewAccountForm ({ user, setUser }) {
         transactions: [],
         currentBalance: 0
       })
+      setLink('/accounts/new/')
+      setPage('Set Up a New Account')
+      if (onDashboard) return navigate('/accounts/new/')
     } catch (error) {
       setStatus('Sorry, something went wrong. Try again later.')
     }
@@ -68,7 +70,7 @@ export default function NewAccountForm ({ user, setUser }) {
         <h4 className='warning-message'>Do not include sensitive information such as bank account or credit card numbers!</h4>
         <br />
         <Button variant='primary' type='submit' disabled={disable}>CREATE ACCOUNT</Button>
-        <br /><br /> <p className='error-message'>&nbsp;{status}</p>
+        <br /><br /> <h4>&nbsp;{status}</h4>
       </Form>
     </>
   )

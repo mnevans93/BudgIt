@@ -1,19 +1,11 @@
 import { useState, useEffect } from 'react'
-import { update } from '../../utilities/users-service'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 
-export default function NewTransactionForm (props) {
-  const [formData, setFormData] = useState({
-    date: '',
-    value: '',
-    description: '',
-    type: ''
-  })
+export default function NewTransactionForm ( { setFormData, formData, setStatus, status, link, page, handleSubmit }) {
   const [disable, setDisable] = useState(true)
-  const [status, setStatus] = useState('')
 
   const handleChange = (event) => {
     setFormData({
@@ -33,74 +25,37 @@ export default function NewTransactionForm (props) {
 
   useEffect(() => {
     setStatus('')
-  }, [props.link, props.page])
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    try {
-      const userData = { ...props.user }
-      const parsedBal = parseFloat(userData.accounts[props.accIndex].currentBalance)
-      const parsedValue = parseFloat(formData.value)
-      
-      if (props.accType === 'Bank Account') {
-        if (formData.type === 'Charge') {
-          userData.accounts[props.accIndex].currentBalance = (parsedBal - parsedValue)
-        } else {
-          userData.accounts[props.accIndex].currentBalance = (parsedBal + parsedValue)
-        }
-      } else {
-        if (formData.type === 'Charge') {
-          userData.accounts[props.accIndex].currentBalance = (parsedBal + parsedValue)
-        } else {
-          userData.accounts[props.accIndex].currentBalance = (parsedBal - parsedValue)
-        }
-      }
-
-      console.log((userData.accounts[props.accIndex].currentBalance).toFixed(2))
-
-      userData.accounts[props.accIndex].transactions.push(formData)
-      props.setUser(await update(userData))
-      setStatus('New transaction created!')
-      setFormData({
-        date: '',
-        value: '',
-        description: '',
-        type: ''
-      })
-    } catch (error) {
-      setStatus('Sorry, something went wrong. Try again later.')
-    }
-  }
+  }, [link, page])
 
   return (
     <Form className='new-transaction' onSubmit={handleSubmit}>
       <Row>
         <Col>
           <Form.Group className='mb-3' controlId='formDate'>
-            <Form.Label>Transaction Date</Form.Label>
+            <Form.Label className='hide-sm'>Date</Form.Label>
             <Form.Control type='date' name='date' value={formData.date} onChange={handleChange} />
           </Form.Group>
         </Col>
         <Col>
-          <Form.Group className='mb-3' controlId='formValue'>
-            <Form.Label>Transaction Value</Form.Label>
-            <Form.Control type='number' name='value' value={formData.value} onChange={handleChange} />
-          </Form.Group>
-        </Col>
-        <Col>
           <Form.Group className='mb-3' controlId='formDescription'>
-            <Form.Label>Transaction Description</Form.Label>
-            <Form.Control type='text' name='description' value={formData.description} onChange={handleChange} />
-          </Form.Group>
-        </Col>
-        <Col>
-          <Form.Group className='mb-3' controlId='formDescription'>
-            <Form.Label>Transaction Type</Form.Label>
+            <Form.Label className='hide-sm'>Type</Form.Label>
             <Form.Select name='type' value={formData.type} onChange={handleChange} required>
               <option />
               <option>Charge</option>
               <option>Debit</option>
             </Form.Select>
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className='mb-3' controlId='formValue'>
+            <Form.Label className='hide-sm'>Value</Form.Label>
+            <Form.Control type='number' name='value' value={formData.value} onChange={handleChange} />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className='mb-3' controlId='formDescription'>
+            <Form.Label className='hide-sm'>Description</Form.Label>
+            <Form.Control type='text' name='description' value={formData.description} onChange={handleChange} />
           </Form.Group>
         </Col>
       </Row>

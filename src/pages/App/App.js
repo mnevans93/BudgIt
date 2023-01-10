@@ -16,6 +16,7 @@ export default function App () {
   const [user, setUser] = useState(getUser())
   const [page, setPage] = useState('My Dashboard')
   const [link, setLink] = useState('/welcome')
+  const [status, setStatus] = useState('')
 
   const handleClick = (e, link) => {
     e.preventDefault()
@@ -28,9 +29,9 @@ export default function App () {
         ? <>
           <NavBar user={user} setUser={setUser} page={page} link={link} setLink={setLink} navigate={navigate} handleClick={handleClick} />
           <Routes>
-            <Route path='/dashboard' element={<DashboardPage page={page} setPage={setPage} user={user} setUser={setUser} getUser={getUser} />} />
-            <Route path='/accounts/new' element={<NewAccountPage page={page} setPage={setPage} user={user} setUser={setUser} />} />
-            <Route path='/accounts/*' element={<AccountPage page={page} setPage={setPage} user={user} setUser={setUser} link={link} />} />
+            <Route path='/dashboard' element={<DashboardPage page={page} setPage={setPage} user={user} setUser={setUser} setLink={setLink} navigate={navigate} getUser={getUser} status={status} setStatus={setStatus} />} />
+            <Route path='/accounts/new' element={<NewAccountPage page={page} setPage={setPage} link={link} setLink={setLink} user={user} setUser={setUser} status={status} setStatus={setStatus} />} />
+            <Route path='/accounts/*' element={<AccountPage link={link} setLink={setLink} page={page} setPage={setPage} user={user} setUser={setUser} navigate={navigate} status={status} setStatus={setStatus} />} />
             <Route path='/options' element={<OptionsPage page={page} setPage={setPage} user={user} setUser={setUser} />} />
             <Route path='/*' element={<Navigate to='/dashboard' />} />
           </Routes>

@@ -7,7 +7,7 @@ export default function WelcomePage ({ link, navigate, handleClick }) {
   }, [link])
 
   return (
-    <main className="welcome">
+    <main className="static">
       <h1>Welcome to BudgIt!</h1>
       <h2>BudgIt is a free, simple, and fast expense tracker app. Get started today!</h2>
       <br />
