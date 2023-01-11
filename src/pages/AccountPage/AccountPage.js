@@ -3,7 +3,8 @@ import { update } from '../../utilities/users-service'
 import NewTransactionForm from '../../components/NewTransactionForm/NewTransactionForm'
 import TransactionTable from '../../components/TransactionTable/TransactionTable'
 import TransactionModal from '../../components/TransactionModal/TransactionModal'
-import AccountModal from '../../components/AccountModal/AccountModal'
+import AccountUpdateModal from '../../components/AccountUpdateModal/AccountUpdateModal'
+import AccountDeleteModal from '../../components/AccountDeleteModal/AccountDeleteModal'
 
 export default function AccountPage ({ link, setLink, page, setPage, user, setUser, navigate, status, setStatus }) {
   const [account, setAccount] = useState({
@@ -21,13 +22,17 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
     type: ''
   })
 
-  const [showT, setShowT] = useState(false)
-  const handleCloseT = () => setShowT(false)
-  const handleShowT = () => setShowT(true)
+  const [showTEdit, setShowTEdit] = useState(false)
+  const handleCloseTEdit = () => setShowTEdit(false)
+  const handleShowTEdit = () => setShowTEdit(true)
 
-  const [showA, setShowA] = useState(false)
-  const handleCloseA = () => setShowA(false)
-  const handleShowA = () => setShowA(true)
+  const [showADelete, setShowADelete] = useState(false)
+  const handleCloseADelete = () => setShowADelete(false)
+  const handleShowADelete = () => setShowADelete(true)
+
+  const [showAUpdate, setShowAUpdate] = useState(false)
+  const handleCloseAUpdate = () => setShowAUpdate(false)
+  const handleShowAUpdate = () => setShowAUpdate(true)
   
   const [operation, setOperation] = useState('edit')
 
@@ -177,20 +182,21 @@ export default function AccountPage ({ link, setLink, page, setPage, user, setUs
     setTargetTransaction(element)
     setUpdateData(element)
     setStatus('')
-    handleShowT()
+    handleShowTEdit()
   }
 
   return (
     <main>
       <h1>{account.nickname}</h1>
+      <AccountUpdateModal show={showAUpdate} handleShow={handleShowAUpdate} handleClose={handleCloseAUpdate} account={account} accIndex={accIndex} user={user} setUser={setUser} link={link} />
       <h2>Current Balance: {account.type === 'Bank Account' ? <span>${account.currentBalance.toFixed(2)}</span> : <span className='no-stonks'>${account.currentBalance.toFixed(2)}</span>}</h2>
       <br />
       <h3>New Transaction</h3>
       <NewTransactionForm setFormData={setFormData} formData={formData} setStatus={setStatus} status={status} link={link} page={page} handleSubmit={transactionSubmit} />
       <h3>Transaction History</h3>
-      <TransactionTable handleClick={handleClick} handleShow={handleShowT} setOperation={setOperation} user={user} setUser={setUser} accIndex={accIndex} renderAcc={false} link={link} page={page} />
-      <TransactionModal operation={operation} show={showT} handleClose={handleCloseT} handleEdit={transactionEdit} handleDelete={transactionDelete} updateData={updateData} setUpdateData={setUpdateData} />
-      <AccountModal show={showA} handleShow={handleShowA} handleClose={handleCloseA} handleDelete={accountDelete} />
+      <TransactionTable handleClick={handleClick} handleShow={handleShowTEdit} setOperation={setOperation} user={user} setUser={setUser} accIndex={accIndex} renderAcc={false} link={link} page={page} />
+      <TransactionModal operation={operation} show={showTEdit} handleClose={handleCloseTEdit} handleEdit={transactionEdit} handleDelete={transactionDelete} updateData={updateData} setUpdateData={setUpdateData} />
+      <AccountDeleteModal show={showADelete} handleShow={handleShowADelete} handleClose={handleCloseADelete} handleDelete={accountDelete} />
     </main>
   )
 }

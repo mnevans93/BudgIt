@@ -65,7 +65,7 @@ export default function NewAccountForm ({ user, setUser, setLink, setPage, navig
 
   const checkIfUnique = () => {
     for (const acc in user.accounts) {
-      if (accInfo.nickname == user.accounts[acc].nickname) {
+      if (accInfo.nickname === user.accounts[acc].nickname) {
         return false
       }
     }

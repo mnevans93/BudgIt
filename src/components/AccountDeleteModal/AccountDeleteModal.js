@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-export default function AccountModal ({ show, handleShow, handleClose, handleDelete }) {
+export default function AccountDeleteModal ({ show, handleShow, handleClose, handleDelete }) {
     const handleClick = () => {
         handleClose()
         handleDelete()
