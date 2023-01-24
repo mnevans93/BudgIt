@@ -16,6 +16,8 @@ export default function WelcomePage ({ link, navigate, handleClick }) {
         <br /><br />
         <Button href='/login' onClick={(e) => handleClick(e, '/login')}>LOGIN</Button>
       </div>
+      <br /><br /><br />
+      <Button href='https://github.com/mnevans93'>CLICK HERE TO CHECK OUT MY GITHUB!</Button>
     </main>
   )
 }
