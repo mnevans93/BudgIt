@@ -25,7 +25,7 @@ const userSchema = new Schema({
       delete ret.password
       return ret
     }
-  }, id: false
+  }
 })
 
 userSchema.pre('save', async function (next) {
