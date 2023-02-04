@@ -16,9 +16,10 @@ export default function OptionsPage (props) {
   const handleDelete = async () => {
     try {
       const userData = { ...props.user }
-      props.setUser(await deleteUser(userData))
+      const deletedUser = await deleteUser(userData)
       props.setLink('/welcome')
       props.setPage('')
+      props.setUser(null)
     } catch (error) {
       setStatus('Sorry, something went wrong. Try again later.')
     }
@@ -28,7 +29,7 @@ export default function OptionsPage (props) {
     <main>
       <OptionsForm user={props.user} setUser={props.setUser} />
       <br />
-      <OptionsModal show={show} handleClose={handleClose} handleShow={handleShow} handleDelete={handleDelete} user={props.user} setUser={props.setUser} />
+      <OptionsModal show={show} handleClose={handleClose} handleShow={handleShow} handleDelete={handleDelete} />
       <br /><p className='error-message'>&nbsp;{status}</p>
     </main>
   )

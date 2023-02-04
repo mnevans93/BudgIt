@@ -10,8 +10,8 @@ router.post('/login', dataController.login, apiController.auth)
 // Token check route
 router.get('/check-token', ensureLoggedIn, checkToken)
 // Update info route, such as adding new accounts or transactions to those accounts
-router.put('/:id', dataController.update, apiController.auth)
+router.put('/:id', ensureLoggedIn, dataController.verifyAgainstDB, dataController.update, apiController.auth)
 // Delete a user's account entirely
-router.delete('/:id', dataController.deleteUser, apiController.auth)
+router.delete('/:id', ensureLoggedIn, dataController.verifyAgainstDB, dataController.deleteUser)
 
 module.exports = router
