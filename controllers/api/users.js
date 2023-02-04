@@ -7,6 +7,14 @@ const checkToken = (req, res) => {
 }
 
 const dataController = {
+  async verifyAgainstDB (req, res, next) {
+    const dbItem = await User.findById(req.params.id)
+    if (req.user.name === dbItem.name) {
+      next()
+    } else {
+      res.status(401)
+    }
+  },
   async create (req, res, next) {
     try {
       const user = await User.create(req.body)
@@ -45,6 +53,7 @@ const dataController = {
   async deleteUser (req, res, next) {
     try {
       const user = await User.findByIdAndDelete(req.body._id)
+      res.json(user)
       next()
     } catch {
       res.status(400).json('Account deletion failed.')

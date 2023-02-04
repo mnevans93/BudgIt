@@ -7,6 +7,7 @@ export default function TransactionTable ( {handleClick, user, accIndex, renderA
   const [transactions, setTransactions] = useState(null)
 
   const sortAndMap = () => {
+    if (!user.accounts[accIndex].transactions.length) return null
     sortArrayByDate(user.accounts[accIndex].transactions)
     return user.accounts[accIndex].transactions.map(element =>
       <tr key={element._id}>
